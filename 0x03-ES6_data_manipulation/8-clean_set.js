@@ -1,11 +1,15 @@
-export default function cleanSet(set, startString) {
-  const list = [];
-  if (typeof startString !== 'string' || startString === '') {
-    return '';
-  }
-  for (const x of set) {
-    if (typeof x === 'string' && x.startsWith(startString)) {
-      list.push(x.slice(startString.length));
+function cleanSet(set, startString) {
+  if (!startString || startString === '') return '';
+
+  let result = '';
+  for (let item of set) {
+    if (item && item.startsWith(startString)) {
+      result += `${item.slice(startString.length)}-`;
     }
   }
-  return list.join('-');
+
+  // Remove the last '-' from the result string
+  return result.slice(0, result.length - 1);
+}
+
+export default cleanSet;
